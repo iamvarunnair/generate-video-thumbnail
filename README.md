@@ -37,7 +37,7 @@ Dillinger uses a number of open source projects to work properly:
 -   [Django](djangoproject.com)
 -   [Moviepy](pypi.org/project/moviepy)
 -   [Requests](pypi.org/project/requests)
--   [Ffmpeg](ffmpeg.org)
+-   [Ffmpeg](ffmpeg.org) - installed on the system and added to environment path/system path
 -   [Virtualenvwrapper](pypi.org/project/virtualenvwrapper)
 
 #
