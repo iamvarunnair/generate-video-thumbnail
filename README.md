@@ -68,6 +68,12 @@ Start virtual environment
 workon <env_name>
 ```
 
+Install dependencies in virtual environment
+
+```sh
+pip install -r requirements.txt
+```
+
 Run django server on port 8000
 
 ```sh
