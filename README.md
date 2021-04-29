@@ -32,7 +32,7 @@ Algorithm logic:
 
 ## Tech
 
-Dillinger uses a number of open source projects to work properly:
+Dependencies used
 
 -   [Django](djangoproject.com)
 -   [Moviepy](pypi.org/project/moviepy)
