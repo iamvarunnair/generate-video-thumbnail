@@ -46,7 +46,7 @@ Dependencies used
 
 ## Installation
 
-Dillinger requires [Python 3](python.org) to run.
+Requires [Python 3](python.org) to run.
 
 #
 
