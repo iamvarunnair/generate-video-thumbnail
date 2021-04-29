@@ -45,10 +45,6 @@ settings.configure(
 )
 
 
-def index(request):
-    return HttpResponse('<html><head></head><body><h1>Hello World</h1></body></html>')
-
-
 @ensure_csrf_cookie
 def uploadTemplate(request):
     return HttpResponse(
@@ -100,8 +96,7 @@ def uploadView(request):
 
 
 urlpatterns = (
-    url(r'^$', index),
-    url(r'^form/$', uploadTemplate, name='form'),
+    url(r'^$', uploadTemplate, name='form'),
     url(r'^upload/$', uploadView, name='upload'),
 )
 
