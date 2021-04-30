@@ -77,7 +77,7 @@ pip install -r requirements.txt
 Run django server on port 8000
 
 ```sh
-py tint_django.py runserver 8000
+py tiny_django.py runserver 8000
 ```
 
 Close when done with running the program
