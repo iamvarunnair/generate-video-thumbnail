@@ -1,4 +1,4 @@
-# Generate Video Thumbnails
+# Generate Video Thumbnail
 
 #
 
