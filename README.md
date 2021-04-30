@@ -2,7 +2,7 @@
 
 #
 
-#### _Upload thubnail from an html form and generate a thumbnail, preview, store it as a file or Uploaded file._
+#### _Upload thubnail from an html form and generate a thumbnail, preview, store it as a file in project directory or Uploaded file in database._
 
 #
 
