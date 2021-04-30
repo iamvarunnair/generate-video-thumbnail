@@ -80,10 +80,10 @@ Run django server on port 8000
 py tiny_django.py runserver 8000
 ```
 
-Close when done with running the program
+Close virtual environment when done with running the program
 
 ```sh
-workon <env_name>
+deactivate
 ```
 
 #
