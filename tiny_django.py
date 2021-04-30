@@ -44,6 +44,10 @@ settings.configure(
     ),
 )
 
+"""
+    Template with a form(with csrf token) to upload video files.
+"""
+
 
 @ensure_csrf_cookie
 def uploadTemplate(request):
@@ -56,29 +60,54 @@ def uploadTemplate(request):
         f"</form>")
 
 
+"""
+    View to handle the template form,
+    generate thumbnail from video file and
+    return a template with video and thumbnail preview.
+"""
+
+
 def uploadView(request):
     if request.method == 'POST':
         context = {
+            # Converting InMemoryUploadedFile to base64 url data to bind to template video source tag.
             'video': b64encode(request.FILES['video'].read()).decode('utf-8'),
-            # Converting InMemoryUploadedFile to base64 url data
         }
+
+        # creating a temporary video file, reading uploaded video file and writing it to temporary video file.
         with tempfile.NamedTemporaryFile(suffix='.mp4', dir=TMPDIR, delete=False) as destination:
             for chunk in request.FILES['video'].chunks():
                 destination.write(chunk)
+            # Loading the temporary video file into moviepy VideoFileClip class.
             clip = VideoFileClip(destination.name)
+            # closing reading operation on temporary file just to be safe.
             destination.close()
 
-        # clip.save_frame("thumbnail.jpg", t=1.00)      # to save in current directory
+        # clip.save_frame("thumbnail.jpg", t=1.00)      # if we want to save a thumbnail image file in current directory
+
+        # get the first frame of temporary video file
         frame_data = clip.get_frame(1)
+        # convert frame to an PIL Image object
         img = Image.fromarray(frame_data, 'RGB')
+        # Generate thumbnail of size 300x300, although these are max values and aspect ratio of image is maintained.
         img.thumbnail((300, 300))
+
+        # initiate a BytesIO buffer
         byte_io = BytesIO()
+        # add image to buffer
         img.save(byte_io, 'PNG')
+
+        # convert image to InMemoryUploadedFile format to store in django database
         imageFileObject = InMemoryUploadedFile(
             byte_io, None, 'test0.png', 'image/jpeg', byte_io.tell, None)
+        # convert image into base64 url data to bind an image preview in src tag.
         imageBase64 = b64encode(byte_io.getvalue()).decode('utf-8')
+
+        # close moviepy VideoFileClip class
         clip.close()
+        # remove temporary video file from project directory
         os.remove(os.path.join(TMPDIR, destination.name))
+    # return template
     return HttpResponse(
         f"<div style='display: flex; justify-content: space-evenly; align-items: flex-end'>"
         f"<div>"
